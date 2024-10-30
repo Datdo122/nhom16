@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự đoán giá nhà</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Tiêu đề Dự đoán giá nhà ở đầu trang -->
+    <h1>Dự đoán giá nhà</h1>
+    
+    <form action="/predict" method="POST">
+        <label for="MSZoning">Khu vực (MSZoning):</label>
+        <select id="MSZoning" name="MSZoning" required>
+            <option value="RL">RL: Residential Low Density - Khu dân cư mật độ thấp</option>
+            <option value="RM">RM: Residential Medium Density - Khu dân cư mật độ trung bình</option>
+            <option value="FV">FV: Floating Village Residential - Khu dân cư làng nổi</option>
+            <option value="RH">RH: Residential High Density - Khu dân cư mật độ cao</option>
+            <option value="C">C: Commercial - Khu thương mại</option>
+        </select>
+        <small>Chọn khu vực nhà theo phân loại trên.</small><br>
+
+        <label for="LotArea">Diện tích (LotArea):</label>
+        <input type="number" id="LotArea" name="LotArea" required>
+        <small>Diện tích tổng của lô đất (sq ft), khoảng 1000 - 20000</small><br>
+
+        <label for="OverallQual">Chất lượng tổng thể (OverallQual):</label>
+        <input type="number" id="OverallQual" name="OverallQual" required>
+        <small>Đánh giá từ 1 - 10, 1: Rất tệ, 10: Rất tốt</small><br>
+
+        <label for="YearBuilt">Năm xây dựng (YearBuilt):</label>
+        <input type="number" id="YearBuilt" name="YearBuilt" required>
+        <small>Năm xây dựng nhà, ví dụ: 1900 - 2020</small><br>
+
+        <label for="GrLivArea">Diện tích mặt sàn (GrLivArea):</label>
+        <input type="number" id="GrLivArea" name="GrLivArea" required>
+        <small>Tổng diện tích sàn sống (sq ft), khoảng 500 - 5000</small><br>
+
+        <label for="BedroomAbvGr">Số phòng ngủ (BedroomAbvGr):</label>
+        <input type="number" id="BedroomAbvGr" name="BedroomAbvGr" required>
+        <small>Số phòng ngủ trên mặt đất, khoảng 0 - 8</small><br>
+
+        <label for="TotRmsAbvGrd">Tổng số phòng (TotRmsAbvGrd):</label>
+        <input type="number" id="TotRmsAbvGrd" name="TotRmsAbvGrd" required>
+        <small>Tổng số phòng trên mặt đất (không bao gồm nhà tắm), khoảng 2 - 14</small><br>
+
+        <label for="GarageCars">Số xe trong garage (GarageCars):</label>
+        <input type="number" id="GarageCars" name="GarageCars" required>
+        <small>Số lượng xe có thể để trong garage, khoảng 0 - 4</small><br>
+
+        <label for="GarageArea">Diện tích garage (GarageArea):</label>
+        <input type="number" id="GarageArea" name="GarageArea" required>
+        <small>Diện tích của garage (sq ft), khoảng 0 - 1500</small><br><br>
+
+        <button type="submit">Dự đoán</button>
+
+        <!-- Hiển thị kết quả dự đoán dưới cùng của form -->
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </form>
+</body>
+</html>

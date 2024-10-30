@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pickle
 import numpy as np
 import pandas as pd
+import os
 
 # Load the saved model
 with open('house_price_model.pkl', 'rb') as file:
@@ -47,4 +48,5 @@ def predict():
     return render_template('index.html', prediction_text=f'Giá nhà dự đoán: ${prediction:,.2f}')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 8000))  # Mặc định là 8000 nếu không có biến môi trường PORT
+    app.run(host="0.0.0.0", port=port)
